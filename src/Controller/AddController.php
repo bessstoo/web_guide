@@ -34,15 +34,46 @@ class AddController extends AbstractController
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
         $item = new PageItem();
+//        dump($item);die();
+//        $FormArray = $doctrine->getRepository(PageItem::class)->findAll();
+//        $FormCodes = [];
+//        foreach ($FormArray as $items) {
+//            $FormCodes[$items->getCode()] = $items->getId();
+//        }
+//
+//        $form = $this->createForm(AddPageType::class, $item, ['array' => $FormCodes]);
         $form = $this->createForm(AddPageType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $item = $form->getData();
             $item->setCode($this->RandomCode($doctrine));
-            $item->setIsParent(false);
-            if (!is_null($item->getParentId())){
-                $doctrine->getRepository(PageItem::class)->find($item->getParentId())->setIsParent(true);
-            }
+            $code = $item->getCode();
+            $item->setParentId(null);
+
+            $em = $doctrine->getManager();
+            $em->persist($item);
+            $em->flush();
+
+            return $this->redirectToRoute('show_one_page', ['page_code' => $code]);
+        }
+
+        return $this->render('add/index.html.twig', [
+            'controller_name' => 'AddController',
+            "form" => $form
+        ]);
+    }
+
+    #[Route('/add_sub_page/{parent_id}', name: 'app_add_sub_page')]
+    public function AddSubPage(ManagerRegistry $doctrine, Request $request, $parent_id): Response
+    {
+        $item = new PageItem();
+        $parentItem = $doctrine->getRepository(PageItem::class)->find($parent_id);
+        $item->setParentId($parentItem->getId());
+        $form = $this->createForm(AddPageType::class, $item);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $item = $form->getData();
+            $item->setCode($this->RandomCode($doctrine));
             $code = $item->getCode();
 
             $em = $doctrine->getManager();

@@ -40,9 +40,13 @@ class MainController extends AbstractController
     #[Route('/page/{page_code}', name: 'show_one_page')]
     public function ViewOneItem(ManagerRegistry $doctrine, $page_code) : Response
     {
+        $pages = $doctrine->getRepository(PageItem::class)->findAll();
+        $tree = $this->BuildTree($pages);
         $item = $doctrine->getRepository(PageItem::class)->findBy(['code' => $page_code]);
 
-        return $this->render('main/one_page.html.twig', ['page' => $item]);
+
+        return $this->render('main/one_page.html.twig', ['page' => $item,
+            'tree' => $tree]);
     }
 
 }

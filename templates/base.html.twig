@@ -26,25 +26,27 @@
                 <div class="header_logo">
                     <a href="{{ path('homepage') }}">GUIDE</a>
                 </div>
-                {% block add_button %}
+                {% block buttons %}
 
                 {% endblock %}
             {% endblock %}
         </header>
         <div class="center_block_main">
-{#            <aside>#}
-{#                <ul>#}
-{#                    <li>#}
-{#                        <a href="{{ path('Products') }}">Товары</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="{{ path('Invoice') }}">Накладные</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a href="{{ path('Items_in_invoice') }}">Приход/Расход</a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </aside>#}
+            <aside>
+                {% block aside %}
+{#                    <ul>#}
+{#                        <li>#}
+{#                            <a href="{{ path('Products') }}">Товары</a>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <a href="{{ path('Invoice') }}">Накладные</a>#}
+{#                        </li>#}
+{#                        <li>#}
+{#                            <a href="{{ path('Items_in_invoice') }}">Приход/Расход</a>#}
+{#                        </li>#}
+{#                    </ul>#}
+                {%endblock %}
+            </aside>
             <div class="wrapper">
                 <main>
                     {% block body %}

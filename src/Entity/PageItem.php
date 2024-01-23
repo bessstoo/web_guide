@@ -26,8 +26,6 @@ class PageItem
     #[ORM\Column(nullable: true)]
     private ?int $parent_id = null;
 
-    #[ORM\Column]
-    private ?bool $is_parent = null;
 
     public function getId(): ?int
     {
@@ -82,15 +80,4 @@ class PageItem
         return $this;
     }
 
-    public function isIsParent(): ?bool
-    {
-        return $this->is_parent;
-    }
-
-    public function setIsParent(bool $is_parent): static
-    {
-        $this->is_parent = $is_parent;
-
-        return $this;
-    }
 }

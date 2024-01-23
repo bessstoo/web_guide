@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\PageItem;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,7 +20,14 @@ class AddPageType extends AbstractType
 //            ->add('code')
             ->add('name', TextType::class, ['label' => 'Название:'])
             ->add('body', TextareaType::class, ['label' => 'Содержание'])
-            ->add('parent_id')
+//            ->add('parent_id', ChoiceType::class, [
+//                'choices' => [
+//                    '' => null,
+//                    'Существующие страницы' => $options['array']
+//                ]
+//
+//
+//            ])
             ->add('save', SubmitType::class, ['label' => 'Добавить'])
         ;
     }
@@ -27,6 +36,7 @@ class AddPageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PageItem::class,
+            'array' => array(),
         ]);
     }
 }

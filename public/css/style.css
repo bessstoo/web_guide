@@ -31,6 +31,7 @@ body {
 
 ul{
     list-style-type: none;
+    padding-left: 30px;
 }
 
 header {
@@ -84,6 +85,14 @@ header button.green {
     cursor: pointer;
 
 }
+
+header a {
+    margin: 0 0 0 10px;
+}
+
+.code p {
+    text-align: right;
+}
 .center_block_main {
     display: flex;
     margin: auto 0;
@@ -96,17 +105,46 @@ aside {
     border-right: 1px solid #E8E8E8;
 }
 
-aside ul {
-    margin: 30px 10px;
+/*aside ul {*/
+/*    margin: 30px 10px;*/
+/*}*/
+
+/*aside ul li {*/
+/*    margin: 5px 10px;*/
+/*}*/
+
+aside div {
+    margin: 30px 50px 0 10px;
+}
+.folders li {
+    position: relative;
+    padding-top: 20px;
 }
 
-aside ul li {
-    margin: 5px 10px;
+.folders li:before{
+    content: "";
+    border-left: 3px solid black;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: -30px;
 }
 
+.folders li:after {
+    content: "";
+    border-bottom: 3px solid black;
+    position: absolute;
+    left: -30px;
+    top: 30px;
+    width: 20px;
+}
+
+.folders li:last-child::before{
+    height: 30px;
+}
 aside ul li a {
     display: block;
-    padding: 10px 15px;
+    /*padding: 10px 15px;*/
     color: #232423;
     text-decoration: none;
 }

@@ -1,17 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}GUIDE{% endblock %}
-{% block add_button %}
-    <a href="{{ path('app_add_page')}}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/icons8-plus.svg') }}"></a>
+{% block buttons %}
+    <a href="{{ path('app_edit_page', {'page_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/free-icon-pencil-6367065.png') }}"></a>
+    <a href="{{ path('app_delete_post', {'post_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/free-icon-minus-button-4436695.png') }}"></a>
+    <a href="{{ path('app_add_sub_page', {'parent_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/icons8-plus.svg') }}"></a>
+{% endblock %}
+{% block aside %}
+    {% macro renderItems(items) %}
+        <ul>
+            {% for item in items %}
+                <li>
+                    <a href="{{ path('show_one_page', {'page_code': item.code}) }}"> {{ item.name }}</a>
+                    {% if item.children is defined and item.children is not empty %}
+                        {{ _self.renderItems(item.children) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endmacro %}
+    <div>
+        <ul class="folders">
+            {{ _self.renderItems(tree) }}
+        </ul>
+    </div>
 {% endblock %}
 {% block body %}
     <div class="wrapper">
         {% for item in page %}
-            {{ item.id }}<br>
-            {{ item.code }}<br>
-            {{ item.name }}<br>
-            {{ item.body }}<br>
-            {{ item.parentId }}<br>
+            <div class="code">
+                <p>Код страницы: <b>{{ item.code }}</b></p>
+            </div>
+            <h1>{{ item.name }}</h1>
+            <p>{{ item.body }}</p>
         {% endfor %}
     </div>
 {% endblock %}
