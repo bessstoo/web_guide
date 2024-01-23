@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+main {
+    width: 100%;
+    flex-grow: 1;
+}
+html {
+    height: 100%;
+}
+
+td img {
+    margin: 1px 11px 1px 1px;
+    width: 24px;
+}
+img {
+    width: 36px;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+ul{
+    list-style-type: none;
+}
+
+header {
+    color: #ffffff;
+    background: #232423;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 10px;
+    align-items: center;
+}
+
+header nav ul{
+    display: flex;
+    align-items: center;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+header .header_logo {
+    padding:20px 15px;
+    color: #ffffff;
+    font-weight: bold;
+    margin-right: auto;
+}
+header .header_logo a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+
+
+header ul li a{
+    display:block;
+    padding:20px 15px;
+}
+
+header ul li a:hover {
+    background: #363636;
+}
+
+header button.green {
+    color: #ffffff;
+    padding: 9px 25px;
+    background-color: rgb(103, 255, 106);
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin-left:20px;
+    cursor: pointer;
+
+}
+.center_block_main {
+    display: flex;
+    margin: auto 0;
+    height: 100%;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #E8E8E8;
+}
+
+aside ul {
+    margin: 30px 10px;
+}
+
+aside ul li {
+    margin: 5px 10px;
+}
+
+aside ul li a {
+    display: block;
+    padding: 10px 15px;
+    color: #232423;
+    text-decoration: none;
+}
+
+aside ul li a:hover {
+    background: #F5F5F5;
+}
+
+footer {
+    text-align: center;
+    color: #fff;
+    padding: 10px 0;
+    width: 100%;
+    background: #232423;
+}
+
+.form {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.form div {
+    margin: 0 0 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.form button {
+    align-self: center;
+}
+
+.wrapper {
+    flex-grow: 1;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+table {
+    width: 100%; /* Ширина таблицы */
+    background: #ffffff; /* Цвет фона таблицы */
+    color: #000000; /* Цвет текста */
+    border-spacing: 1px; /* Расстояние между ячейками */
+}
+td, th {
+    background: #ffffff; /* Цвет фона ячеек */
+    padding: 5px; /* Поля вокруг текста */
+    text-align: center;
+}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GUIDE{% endblock %}
+{% block add_button %}
+    <a href="{{ path('app_add_page')}}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/icons8-plus.svg') }}"></a>
+{% endblock %}
+{% block body %}
+    {% macro renderItems(items) %}
+        <ul class="folders">
+            {% for item in items %}
+                <li>
+                    {{ item.name }}
+                    {% if item.isIsParent %}
+                        {{ _self.renderItems(item.children) }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endmacro %}
+    <div>
+        {{ _self.renderItems(tree) }}
+    </div>
+{% endblock %}
