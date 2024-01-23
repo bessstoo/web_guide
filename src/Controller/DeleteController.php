@@ -12,17 +12,22 @@ class DeleteController extends AbstractController
 {
     public function DeleteBranch(ManagerRegistry $doctrine, $post_id)
     {
-        $item = $doctrine->getRepository(PageItem::class)->findBy(['parent_id' => $post_id]);
-        if ($item) {
-            $child_id = $item->getId();
-            $this->DeleteBranch($doctrine, $child_id);
+        $em = $doctrine->getManager();
+        $item = $em->getRepository(PageItem::class)->find($post_id);
+
+        if (!$item){
+            return;
         }
-        else {
-            $item = $doctrine->getRepository(PageItem::class)->find($post_id);
-            $em = $doctrine->getManager();
-            $em->remove($item);
-            $em->flush();
+
+        $children = $em->getRepository(PageItem::class)->findBy(['parent_id' => $post_id]);
+        if ($children) {
+            foreach ($children as $child) {
+                $this->DeleteBranch($doctrine, $child->getId());
+            }
         }
+
+        $em->remove($item);
+        $em->flush();
     }
     #[Route('/delete_post/{post_id}', name: 'app_delete_post')]
     public function index(ManagerRegistry $doctrine, $post_id): Response
