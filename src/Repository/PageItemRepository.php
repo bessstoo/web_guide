@@ -46,7 +46,7 @@ class PageItemRepository extends ServiceEntityRepository
         $result = [];
 
         foreach ($items as $item) {
-            $children = $this->findBy(['parent_id' => $item->getId()]);
+            $children = $this->findBy(['parent_code' => $item->getCode()]);
             $item->children = $this->getItemsWithChildren($children);
 
             $result[] = $item;

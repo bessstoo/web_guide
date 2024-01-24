@@ -13,13 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 class MainController extends AbstractController
 {
 
-    public function BuildTree(array $elements, $parentId = null): array
+    public function BuildTree(array $elements, $parentCode = null): array
     {
         $branch = [];
 
         foreach ($elements as $element) {
-            if($element->getParentId() == $parentId){
-                $children = $this->BuildTree($elements, $element->getId());
+            if($element->getParentCode() == $parentCode){
+                $children = $this->BuildTree($elements, $element->getCode());
                 if($children){
                     $element->children = $children;
                 }

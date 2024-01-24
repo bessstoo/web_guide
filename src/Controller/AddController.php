@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PageItem;
 use App\Form\AddPageType;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,12 +49,11 @@ class AddController extends AbstractController
             $item = $form->getData();
             $item->setCode($this->RandomCode($doctrine));
             $code = $item->getCode();
-            $item->setParentId(null);
+            $item->setParentCode(null);
 
             $em = $doctrine->getManager();
             $em->persist($item);
             $em->flush();
-
             return $this->redirectToRoute('show_one_page', ['page_code' => $code]);
         }
 
@@ -63,12 +63,12 @@ class AddController extends AbstractController
         ]);
     }
 
-    #[Route('/add_sub_page/{parent_id}', name: 'app_add_sub_page')]
-    public function AddSubPage(ManagerRegistry $doctrine, Request $request, $parent_id): Response
+    #[Route('/add_sub_page/{parent_code}', name: 'app_add_sub_page')]
+    public function AddSubPage(ManagerRegistry $doctrine, Request $request, $parent_code): Response
     {
         $item = new PageItem();
-        $parentItem = $doctrine->getRepository(PageItem::class)->find($parent_id);
-        $item->setParentId($parentItem->getId());
+        $parentItem = $doctrine->getRepository(PageItem::class)->findOneBy(['code' => $parent_code]);
+        $item->setParentCode($parentItem->getCode());
         $form = $this->createForm(AddPageType::class, $item);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){

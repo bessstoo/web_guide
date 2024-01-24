@@ -1,16 +1,22 @@
 <item>
 	<test1>
 		<code>sqg4P52S5f1af0gd3d5F3</code>
-		<name>qqqqqqqqqqqq</name>
+		<name>parent</name>
 		<body>aaaaaaaaaaaaaaaaa</body>
-		<parent_id>null</parent_id>
+		<parent_code>null</parent_code>
 	</test1>
 	<test2> 
-		<code>sqg4P52S5f1af0gd1d5F3</code>
-		<name>qwdfsdfsdf</name>
+		<code>null</code>
+		<name>child</name>
 		<body>aaaaaaaaaaaaaaaaa</body>
-		<parent_id>null</parent_id>
+		<parent_code>sqg4P52S5f1af0gd3d5F3</parent_code>
 	</test2>
+	<test3> 
+		<code>null</code>
+		<name>without_code</name>
+		<body>aaaaaaaaaaaaaaaaa</body>
+		<parent_code>null</parent_code>
+	</test3>
 
 </item>
 

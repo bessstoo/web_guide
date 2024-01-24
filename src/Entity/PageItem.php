@@ -23,8 +23,8 @@ class PageItem
     #[ORM\Column(type: Types::TEXT)]
     private ?string $body = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $parent_id = null;
+    #[ORM\Column(length: 40, nullable: true)]
+    private ?string $parent_code = null;
 
 
     public function getId(): ?int
@@ -68,16 +68,17 @@ class PageItem
         return $this;
     }
 
-    public function getParentId(): ?int
+    public function getParentCode(): ?string
     {
-        return $this->parent_id;
+        return $this->parent_code;
     }
 
-    public function setParentId(?int $parent_id): static
+    public function setParentCode(?string $parent_code): static
     {
-        $this->parent_id = $parent_id;
+        $this->parent_code = $parent_code;
 
         return $this;
     }
+
 
 }

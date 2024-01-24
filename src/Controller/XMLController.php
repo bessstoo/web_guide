@@ -18,21 +18,27 @@ class XMLController extends AbstractController
         $form = $this->createForm(UploadFileType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
-        $file = simplexml_load_file($form->get('XML_file')->getData());
-
-        $em = $doctrine->getManager();
-
-        foreach ($file as $item){
-            $page = new PageItem();
-            $page->setCode($item->code);
-            $page->setName($item->name);
-            $page->setBody($item->body);
-            if ($item->parent_id != "null"){
-                $page->setParentId($item->parent_id);
+            $file = simplexml_load_file($form->get('XML_file')->getData());
+            $em = $doctrine->getManager();
+            foreach ($file as $item){
+                $page = new PageItem();
+                if ($item->code != "null"){
+                    $page->setCode($item->code);;
+                }
+                else {
+                    $AddPageInstance = new AddController();
+                    $page->setCode($AddPageInstance->RandomCode($doctrine));
+                }
+                $page->setName($item->name);
+                $page->setBody($item->body);
+                if ($item->parent_code != "null"){
+                    $page->setParentCode($item->parent_code);
+                }
+                $em->persist($page);
+                }
+            $em->flush();
+            return $this->redirectToRoute('homepage');
             }
-            $em->persist($page);
-        };
-        }
         return $this->render('add/index.html.twig', [
             'form' => $form
         ]);
