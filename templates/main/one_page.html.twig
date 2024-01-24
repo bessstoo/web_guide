@@ -1,10 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}GUIDE{% endblock %}
-{% block buttons %}
-    <a href="{{ path('app_edit_page', {'page_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/free-icon-pencil-6367065.png') }}"></a>
-    <a href="{{ path('app_delete_post', {'post_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/free-icon-minus-button-4436695.png') }}"></a>
-    <a href="{{ path('app_add_sub_page', {'parent_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/icons8-plus.svg') }}"></a>
+{% block header %}
+    <div class="header_logo">
+        <a href="{{ path('homepage') }}">GUIDE</a>
+    </div>
+    {{ form(form) }}
+        {% block buttons %}
+            <a href="{{ path('app_edit_page', {'page_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/free-icon-pencil-6367065.png') }}"></a>
+            <a href="{{ path('app_delete_post', {'post_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/free-icon-minus-button-4436695.png') }}"></a>
+            <a href="{{ path('app_add_sub_page', {'parent_id': page[0].id}) }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/icons8-plus.svg') }}"></a>
+        {% endblock %}
 {% endblock %}
 {% block aside %}
     {% macro renderItems(items) %}

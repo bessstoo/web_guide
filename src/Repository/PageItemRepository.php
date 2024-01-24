@@ -21,6 +21,39 @@ class PageItemRepository extends ServiceEntityRepository
         parent::__construct($registry, PageItem::class);
     }
 
+    public function SearchInDirectoryCode($input): array
+    {
+        $qb = $this->createQueryBuilder('item');
+
+        $qb->andWhere('item.code LIKE :code')
+            ->setParameter('code', '%' . $input . '%');
+        return $this->getItemsWithChildren($qb->getQuery()->getResult());
+
+    }
+
+    public function SearchInDirectoryName($input): array
+    {
+        $qb = $this->createQueryBuilder('item');
+
+        $qb->andWhere('LOWER(item.name) LIKE LOWER(:name)')
+            ->setParameter('name', '%' . $input . '%');
+        return $this->getItemsWithChildren($qb->getQuery()->getResult());
+
+    }
+
+    private function getItemsWithChildren($items): array
+    {
+        $result = [];
+
+        foreach ($items as $item) {
+            $children = $this->findBy(['parent_id' => $item->getId()]);
+            $item->children = $this->getItemsWithChildren($children);
+
+            $result[] = $item;
+        }
+        return $result;
+    }
+
 //    /**
 //     * @return PageItem[] Returns an array of PageItem objects
 //     */

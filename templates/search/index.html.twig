@@ -5,11 +5,9 @@
     <div class="header_logo">
         <a href="{{ path('homepage') }}">GUIDE</a>
     </div>
-    {{ form(form) }}
-        {% block buttons %}
-            <a href="{{ path('app_add_page') }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/icons8-plus.svg') }}"></a>
-            <a href="{{ path('app_xml') }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/icons8-plus.svg') }}"></a>
-        {% endblock %}
+    {% block buttons %}
+        <a href="{{ path('app_add_page') }}" style="text-decoration: none; color: #FFFFFF"><img src="{{ asset('icons/icons8-plus.svg') }}"></a>
+    {% endblock %}
 {% endblock %}
 {% block aside %}
     {% macro renderItems(items) %}
@@ -31,5 +29,5 @@
     </div>
 {% endblock %}
 {% block body %}
- <h1>Home Page</h1>
+    <h1>Search</h1>
 {% endblock %}

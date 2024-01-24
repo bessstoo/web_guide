@@ -57,13 +57,17 @@ header .header_logo {
     padding:20px 15px;
     color: #ffffff;
     font-weight: bold;
-    margin-right: auto;
+    /*margin-right: auto;*/
 }
 header .header_logo a{
     text-decoration: none;
     color: #ffffff;
 }
-
+#search_bar {
+    display: flex;
+    justify-content: center;
+    padding-left: 360px;
+}
 
 
 header ul li a{
@@ -84,6 +88,10 @@ header button.green {
     margin-left:20px;
     cursor: pointer;
 
+}
+
+header form {
+  width: 100%;
 }
 
 header a {
@@ -198,4 +206,13 @@ td, th {
     background: #ffffff; /* Цвет фона ячеек */
     padding: 5px; /* Поля вокруг текста */
     text-align: center;
+}
+
+#search_bar_save {
+    background-color: lightgreen;
+    margin: 0 0 0 10px;
+}
+
+.form-group {
+    width: 37%;
 }
