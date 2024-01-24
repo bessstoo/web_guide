@@ -17,7 +17,7 @@ class UploadFileType extends AbstractType
                 'label' => 'XML File'
             ])
             ->add('save', SubmitType::class, [
-
+                'label' => 'Загрузить'
             ])
         ;
     }

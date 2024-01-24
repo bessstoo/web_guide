@@ -32,7 +32,7 @@ class MainController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index(ManagerRegistry $doctrine, Request $request): Response
     {
-        $pages = $doctrine->getRepository(PageItem::class)->findAll();
+        $pages = $doctrine->getRepository(PageItem::class)->findBy([], ['id' => 'ASC']);
         $tree = $this->BuildTree($pages);
         $form = $this->createForm(SearchBarType::class);
         $form->handleRequest($request);
@@ -48,7 +48,7 @@ class MainController extends AbstractController
     #[Route('/page/{page_code}', name: 'show_one_page')]
     public function ViewOneItem(ManagerRegistry $doctrine, $page_code, Request $request) : Response
     {
-        $pages = $doctrine->getRepository(PageItem::class)->findAll();
+        $pages = $doctrine->getRepository(PageItem::class)->findBy([], ['id' => 'ASC']);
         $tree = $this->BuildTree($pages);
         $item = $doctrine->getRepository(PageItem::class)->findBy(['code' => $page_code]);
         $form = $this->createForm(SearchBarType::class);

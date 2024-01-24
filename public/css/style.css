@@ -213,6 +213,6 @@ td, th {
     margin: 0 0 0 10px;
 }
 
-.form-group {
+#search_bar .form-group {
     width: 37%;
 }
